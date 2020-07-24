@@ -1,0 +1,104 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+ScreenManager:
+	transition: SlideTransition()
+	StartScreen:
+	NextScreen:
+
+<StartScreen>:
+	name: 'start'
+	canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'bck.png'
+
+	MDToolbar:
+		title: "How Strong Is Your Friendship?"
+		md_bg_color: app.theme_cls.accent_color
+		right_action_items: [["share", lambda x: root.callback()]]
+	
+	MDLabel:
+		text: 'Friendship Calculator App'
+		halign: 'center'
+		font_style: 'H3'
+		theme_text_color: 'Custom'
+		text_color: (1,0,0,1)
+		pos_hint: {'center_x':0.5, 'center_y':0.9} 
+
+	MDTextField:
+		id: text1
+		hint_text: "Enter Your Name"
+		helper_text: "Your Name Goes Here"
+		helper_text_mode: "on_error"
+		theme_text_color: 'Custom'
+		required: True
+		text_color: (0,1,0,1)
+		pos_hint: {'center_x':0.5, 'center_y':0.65}
+		size_hint_x: None
+		width: 300 
+
+	MDTextField:
+		id: text2
+		hint_text: "Enter Your Friends Name"
+		helper_text: "Dont You Have Any Friends?"
+		helper_text_mode: "on_error"
+		required: True
+		pos_hint: {'center_x':0.5, 'center_y':0.35}
+		size_hint_x: None
+		width: 300
+
+	MDFillRoundFlatIconButton:
+		text: "Check"
+		icon: 'heart'
+		pos_hint: {'center_x': 0.5, 'center_y': 0.2}	
+		size_hint_x: None
+		width: 100
+		text_color: (1,1,1,1) 
+		on_release: root.checkentry()
+		on_release: root.addwidgets()
+		on_release: app.root.current= 'next'
+		
+	MDIconButton:
+		icon: 'heart'
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		user_font_size: "64sp"	
+		size_hint_x: None
+		width: 100
+		
+
+	
+		
+<NextScreen>:
+	name: 'next'
+	canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'bck.png'
+
+	MDLabel:
+		id: box
+		text: f"{str(root.calculator())} %"
+		halign: 'center'
+		font_style: 'H1'
+		theme_text_color: 'Custom'
+		text_color: (1,0,0,1)
+		pos_hint: {'center_x':0.5, 'center_y':0.9} 	
+
+	MDLabel:
+		id: box1
+		text: f"{str(root.level(root.calculator()))}"
+		halign: 'center'
+		font_style: 'H3'
+		theme_text_color: 'Custom'
+		text_color: (0,0,1,1)
+		pos_hint: {'center_x':0.5, 'center_y':0.5}
+		
+
+	MDFillRoundFlatButton:
+		text: "Back"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.1}	
+		size_hint_x: None
+		width: 100
+		on_release: app.root.current= 'start'
+		on_release: root.clearcache()
