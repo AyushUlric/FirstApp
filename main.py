@@ -22,12 +22,6 @@ class StartScreen(Screen):
 			self.dialog2.open()
 		psbl = ["ayush","Ayush"]
 		message = "Woah, It turns out that you are friends with Ayush. Ayush is the the sweetest guy you'll ever meet in your life. Make sure to keep him Happy!"
-		for a in psbl:
-			if a in field1 or a in field2:
-				cbutton = MDFlatButton(text='Close',on_release=self.closeN)
-				Close_button = [cbutton]
-				self.dialog1 = MDDialog(title='Awesome', text=f'{message}', size_hint=(0.95,1), buttons=Close_button)
-				self.dialog1.open()
 
 	def closeN(self,obj):
 		self.dialog1.dismiss()
